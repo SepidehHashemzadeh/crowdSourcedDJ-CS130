@@ -1,13 +1,15 @@
 import React from 'react';
 
 import DatabaseHelper from '../databaseShortcuts.js';
-require("./../resources/css/searchEvent.css");
-class SearchEventListItem extends React.Component {
+
+class SearchListItem extends React.Component {
 	
 	constructor(props) {
 		super(props);
+		this.state = {
+			eventLeader = ""
+		}
 		this.createRequest = this.createRequest.bind(this);
-		this.formatTime = this.formatTime.bind(this);
 	}
 
 	getEventDiv() {
@@ -23,9 +25,8 @@ class SearchEventListItem extends React.Component {
 			return(
 				<li className="eventSearchLoadingItem">
 					<div className="eventSearchLoadingDiv hvr-back-pulse2">
-						<p>{this.props.eventInfo.name} – </p>
-						<p>{this.formatTime(this.props.eventInfo.startTime)}</p>
-						<span className="button-create btn btn-danger joinEventButton" onClick={this.createRequest}>Join</span>
+						<p>{this.props.eventInfo.name}</p>
+						<button className="button-create btn btn-danger" onClick={this.createRequest}>Join</button>
 					</div>
 				</li>
 			);
@@ -36,18 +37,9 @@ class SearchEventListItem extends React.Component {
 		return (this.getEventDiv());
 	}
 
-	formatTime(startTime) {
-		console.log(startTime)
-		var date = "";
-		for(var i = 0; startTime[i] != 'T'; i++) {
-			date += startTime[i];
-		}
-		var d = date.split("-")
-		var formatedDate = d[1]+'/'+d[2]+'/'+d[0]
-		return formatedDate;
-	}
-
 	createRequest() {
+
+		console.log("This is a test");
 
 		var fromId = this.props.user.id;
 		var toId = this.props.eventInfo.userId;
@@ -68,4 +60,4 @@ class SearchEventListItem extends React.Component {
 
 }
 
-export default SearchEventListItem;
+export default SearchListItem;
