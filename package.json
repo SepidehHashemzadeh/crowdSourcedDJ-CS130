@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot",
+    "prod": "NODE_EVN=production node server.js",
+    "postinstall": "webpack -p",
     "test": "jest"
   },
   "author": "",

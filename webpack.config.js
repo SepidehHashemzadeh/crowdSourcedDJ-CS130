@@ -2,7 +2,8 @@ var config = {
    entry: './main.js',
 	
    output: {
-      path:'./',
+      path: __dirname,
+      publicPath: '/',
       filename: 'index.js',
    },
 	
@@ -28,8 +29,7 @@ var config = {
             exclude: /node_modules/,
             loader: 'babel',
             query: {
-               presets: ['es2015', 'es2017', 'react'],
-               plugins: ['transform-runtime', 'transform-decorators-legacy', 'transform-class-properties'],
+               presets: ['es2015', 'es2017', 'react']
             },
          },
          {
