@@ -11,6 +11,7 @@ class SearchEventListItem extends React.Component {
 		this.checkIfRequested = this.checkIfRequested.bind(this);
 		this.testFunc = this.testFunc.bind(this);
 		this.handleClick = this.handleClick.bind(this);
+		this.getEventDiv = this.getEventDiv.bind(this);
 	}
 
 	getEventDiv() {
@@ -31,7 +32,7 @@ class SearchEventListItem extends React.Component {
 								<p>{this.props.eventInfo.name}</p>
 								<p>{this.formatTime()}</p>
 							</div>
-							<span className="button-create btn btn-danger joinEventButton" onClick={this.createRequest}>Join</span>
+							<span className="button-create btn btn-danger joinEventButton" onClick={this.createRequest()}>Join</span>
 						</div>
 					</li>
 				);
@@ -80,7 +81,7 @@ class SearchEventListItem extends React.Component {
 	}
 
 	handleClick() {
-		this.props.handleClick(this.props.eventInfo.id, this.props.user.id);
+		this.props.handleClick(this.props.eventInfo.id, this.props.eventInfo.userId);
 	}
 
 	createRequest() {
@@ -88,11 +89,11 @@ class SearchEventListItem extends React.Component {
 		var fromId = this.props.user.id;
 		var toId = this.props.eventInfo.userId;
 		var eventId = this.props.eventInfo.id;
-
-		var query = "INSERT INTO Invites (fromId, toId, isRequest, eventId, isPending) VALUES ('";
+		//document.getElementById("joinEventButton"+i).style.display = "none";
+		var query = "INSERT INTO Invites (fromId, toId, isAccepted, eventId, isPending) VALUES ('";
 		query +=  fromId + "', '";
 		query += toId + "', '";
-		query += "1" + "', '";
+		query += "0" + "', '";
 		query += eventId + "', '";
 		query += "1'); ";
 
