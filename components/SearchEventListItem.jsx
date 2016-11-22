@@ -9,6 +9,8 @@ class SearchEventListItem extends React.Component {
 		this.createRequest = this.createRequest.bind(this);
 		this.formatTime = this.formatTime.bind(this);
 		this.checkIfRequested = this.checkIfRequested.bind(this);
+		this.testFunc = this.testFunc.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 
 	getEventDiv() {
@@ -24,7 +26,7 @@ class SearchEventListItem extends React.Component {
 			if (!this.checkIfRequested()) {
 				return(
 					<li className="eventSearchLoadingItem">
-						<div className="eventSearchLoadingDiv hvr-back-pulse2">
+						<div onClick={this.handleClick} className="eventSearchLoadingDiv hvr-back-pulse2">
 							<p>{this.props.eventInfo.name}</p>
 							<p>{this.formatTime()}</p>
 							<span className="button-create btn btn-danger joinEventButton" onClick={this.createRequest}>Join</span>
@@ -34,7 +36,7 @@ class SearchEventListItem extends React.Component {
 			} else {
 				return(
 					<li className="eventSearchLoadingItem">
-						<div className="eventSearchLoadingDiv hvr-back-pulse2">
+						<div onClick={this.handleClick} className="eventSearchLoadingDiv hvr-back-pulse2">
 							<p>{this.props.eventInfo.name}</p>
 							<p>{this.formatTime()}</p>
 						</div>
@@ -60,6 +62,10 @@ class SearchEventListItem extends React.Component {
 		}
 	}
 
+	testFunc() {
+		console.log("This worked")
+	}
+
 	checkIfRequested() {
 		if(this.props.invites.length > 0) {
 			for(var i = 0; i < this.props.invites.length; i++) {
@@ -69,6 +75,10 @@ class SearchEventListItem extends React.Component {
 			}
 		}
 		return false
+	}
+
+	handleClick() {
+		this.props.handleClick(this.props.eventInfo.id, this.props.user.id);
 	}
 
 	createRequest() {

@@ -47,6 +47,7 @@ class Dashboard extends React.Component {
 		this.eventCreated = this.eventCreated.bind(this);
 		this.selectTab = this.selectTab.bind(this);
 		this.onEventListItemClick = this.onEventListItemClick.bind(this);
+		this.onSearchEventListItemClick = this.onSearchEventListItemClick.bind(this);
 		this.startPolling = this.startPolling.bind(this);
 		this.poll = this.poll.bind(this);
 		this.onSearchTermChange = this.onSearchTermChange.bind(this);
@@ -174,6 +175,21 @@ class Dashboard extends React.Component {
 			hideEventsLists: true
 		});
 	}
+
+	onSearchEventListItemClick(eventId, eventLeaderId){
+		this.setState({
+			eventId: eventId,
+			eventLeaderId: eventLeaderId
+		});
+		this.setState({
+			eventPageLeaderStyle: {
+				display: 'block'
+			},
+			hideEventLeaderPage: false,
+			hideEventsLists: true
+		});
+	}
+
 	getCurrEventId() {
 		return this.state.eventId;
 	}
@@ -220,7 +236,7 @@ class Dashboard extends React.Component {
 			<div id="searchAndAdd">
 				<SearchEvent onSearchTermChange={this.onSearchTermChange}/>
 				<CreateEventForm user={this.props.user} eventCreated={this.eventCreated}/>
-				<SearchEventList searchStr={this.state.searchStr} user={this.props.user}/>
+				<SearchEventList searchStr={this.state.searchStr} user={this.props.user} handleClick={this.onSearchEventListItemClick}/>
 				<div style={this.state.eventPageLeaderStyle}>
 					{this.state.hideEventLeaderPage ? null : <EventPageLeader getEventId={this.getCurrEventId} 
 															getEventLeaderId={this.getCurrEventLeaderId} 

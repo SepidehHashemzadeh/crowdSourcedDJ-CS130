@@ -23,7 +23,6 @@ class SearchEventList extends React.Component {
 
 		DatabaseHelper(query2).then((res) => {
 						this.setState({invites: res});
-						console.log(res)
 		});
 
 
@@ -46,11 +45,11 @@ class SearchEventList extends React.Component {
 				key++;
 				if(this.state.invites.length > 0) {
 					arr.push(
-						<SearchEventListItem eventInfo={item} key={key} user={this.props.user} invites={this.state.invites}/>
+						<SearchEventListItem eventInfo={item} key={key} user={this.props.user} invites={this.state.invites} handleClick={this.props.handleClick}/>
 					);
 				} else {
 					arr.push(
-					<SearchEventListItem eventInfo={item} key={key} user={this.props.user} invites={[]}/>
+					<SearchEventListItem eventInfo={item} key={key} user={this.props.user} invites={[]} handleClick={this.props.handleClick}/>
 				);
 				}
 			});
