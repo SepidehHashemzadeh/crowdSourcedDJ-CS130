@@ -8,6 +8,7 @@ class SearchEventListItem extends React.Component {
 		super(props);
 		this.createRequest = this.createRequest.bind(this);
 		this.formatTime = this.formatTime.bind(this);
+		this.checkIfRequested = this.checkIfRequested.bind(this);
 	}
 
 	getEventDiv() {
@@ -20,16 +21,27 @@ class SearchEventListItem extends React.Component {
 			);
 		}
 		else {
-			return(
-				<li className="eventSearchLoadingItem">
-					<div className="eventSearchLoadingDiv hvr-back-pulse2">
-						<p>{this.props.eventInfo.name}</p>
-						<p>{this.formatTime()}</p>
-						<span className="button-create btn btn-danger joinEventButton" onClick={this.createRequest}>Join</span>
-					</div>
-				</li>
-			);
-	}
+			if (!this.checkIfRequested()) {
+				return(
+					<li className="eventSearchLoadingItem">
+						<div className="eventSearchLoadingDiv hvr-back-pulse2">
+							<p>{this.props.eventInfo.name}</p>
+							<p>{this.formatTime()}</p>
+							<span className="button-create btn btn-danger joinEventButton" onClick={this.createRequest}>Join</span>
+						</div>
+					</li>
+				);
+			} else {
+				return(
+					<li className="eventSearchLoadingItem">
+						<div className="eventSearchLoadingDiv hvr-back-pulse2">
+							<p>{this.props.eventInfo.name}</p>
+							<p>{this.formatTime()}</p>
+						</div>
+					</li>
+				);
+			}
+		}
 	}
 
 	render() {
@@ -37,16 +49,26 @@ class SearchEventListItem extends React.Component {
 	}
 
 	formatTime() {
-		console.log(this.props.eventInfo)
 		var t = this.props.eventInfo.startTime;
 		if(~this.props.eventInfo.startTime.indexOf("T")) {
 			var d1 = this.props.eventInfo.startTime.split("T");
 			var d2 = d1[0].split("-")
 			var formatedDate = d2[1]+'/'+d2[2]+'/'+d2[0]
-			return " - " + formatedDate;
+			return " – " + formatedDate;
 		} else {
 			return ""
 		}
+	}
+
+	checkIfRequested() {
+		if(this.props.invites.length > 0) {
+			for(var i = 0; i < this.props.invites.length; i++) {
+				if(this.props.invites[i].eventId == this.props.eventInfo.id ) {
+					return true
+				}
+			}
+		}
+		return false
 	}
 
 	createRequest() {
