@@ -35,7 +35,9 @@ class SearchEventList extends React.Component {
 
 			for (var i = 0; i < this.state.events.length; i++) {
 				if(~this.state.events[i].name.indexOf(searchStr)) {
-					matchedEvents.push(this.state.events[i]);
+					if(!this.state.events[i].isEnded) {
+						matchedEvents.push(this.state.events[i]);
+					}
 				}
 			};
 
