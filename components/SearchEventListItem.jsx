@@ -9,7 +9,6 @@ class SearchEventListItem extends React.Component {
 		this.createRequest = this.createRequest.bind(this);
 		this.formatTime = this.formatTime.bind(this);
 		this.checkIfRequested = this.checkIfRequested.bind(this);
-		this.testFunc = this.testFunc.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 		this.getEventDiv = this.getEventDiv.bind(this);
 	}
@@ -65,10 +64,6 @@ class SearchEventListItem extends React.Component {
 		}
 	}
 
-	testFunc() {
-		console.log("This worked")
-	}
-
 	checkIfRequested() {
 		if(this.props.invites.length > 0) {
 			for(var i = 0; i < this.props.invites.length; i++) {
@@ -98,7 +93,6 @@ class SearchEventListItem extends React.Component {
 		query += "1'); ";
 
 		DatabaseHelper(query).then((res) => {
-			//console.log(res);
 		});
 
 	}
