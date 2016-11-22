@@ -26,9 +26,11 @@ class SearchEventListItem extends React.Component {
 			if (!this.checkIfRequested()) {
 				return(
 					<li className="eventSearchLoadingItem">
-						<div onClick={this.handleClick} className="eventSearchLoadingDiv hvr-back-pulse2">
-							<p>{this.props.eventInfo.name}</p>
-							<p>{this.formatTime()}</p>
+						<div className="eventSearchLoadingDiv hvr-back-pulse2">
+							<div onClick={this.handleClick}>
+								<p>{this.props.eventInfo.name}</p>
+								<p>{this.formatTime()}</p>
+							</div>
 							<span className="button-create btn btn-danger joinEventButton" onClick={this.createRequest}>Join</span>
 						</div>
 					</li>
